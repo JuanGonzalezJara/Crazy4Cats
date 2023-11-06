@@ -1,0 +1,8 @@
+<h3 class="display-6">Editing: <%= @post.title %></h3>
+<div class="border mt-4 rounded-4 p-3">
+  <%= render "form", post: @post %>
+  <div class="d-flex gap-4">
+    <%= link_to "Mostrar este Post", @post, class:"link-light" %> |
+    <%= link_to "Volver a Posts", posts_path, class:"link-light" %>
+  </div>
+</div>

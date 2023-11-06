@@ -1,0 +1,16 @@
+<div class="d-flex align-items-center justify-content-between mb-3">
+  <h1 class="display-5 text-light">Posts</h1>
+  <% if user_signed_in? %>
+    <%= link_to "Nuevo Post", new_post_path, class: "btn btn-outline-light btn-sm" %>
+  <% end %>
+</div>
+<div id="posts">
+  <% @posts.each do |post| %>
+    <div class="mb-5 border p-3 rounded-4">
+      <%= render post %>
+      <p class="mt-5">
+        <%= link_to "Mostrar este Post", post, class: "link-light" %>
+      </p>
+    </div>
+  <% end %>
+</div>

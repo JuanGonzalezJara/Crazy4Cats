@@ -1,0 +1,43 @@
+<div class="p-3 border rounded-4">
+  <!-- Mostrar el post -->
+  <%= render @post %>
+  <!-- Reacciones -->
+  <div id="reactions-wraper" class="">
+    <div class="mt-2 d-flex gap-3">
+      <p><%= @post.count_with_reaction_type('like') %></p>
+      <p><%= @post.count_with_reaction_type('dislike') %></p>
+    </div>
+    <% if user_signed_in? %>
+      <div class="d-flex gap-4">
+        <% Reaction.reaction_type.each do |reaction_type| %>
+          <%= button_to "#{reaction_type}", user_reaction_path(post_id: @post.id, reaction_type: reaction_type), method: :post, class: "btn btn-sm btn-outline-primary" %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+  <!-- link y botones de Accion de post -->
+  <div class="d-flex gap-4 align-items-center mt-5 justify-content-center">
+    <%= link_to "Volver a Posts", posts_path, class:"link-light m-0" %>
+    <% if current_user && (current_user.admin? || current_user == @post.user) %>
+      <%= link_to "Editar este Post", edit_post_path(@post), class:"link-light m-0" %>
+      <%= button_to "Eliminar este Post", @post, method: :delete, class: "btn btn-sm btn-outline-light mt-2" %>
+    <% end %>
+  </div>
+</div>
+<!-- Mostrar los comentarios -->
+<div id="comments-section">
+  <h4 class="display-6 my-3">Comentarios</h4>
+  <% @comments.each do |comment| %>
+    <div class="border rounded-4 p-3 my-2">
+      <p class="fst-italic fs-5">
+        <%= comment.author == "anonimo@example.com" ? "Anonimo" : comment.author %>:
+      </p>
+      <p class="fs-6"><%= simple_format(comment.content) %></p>
+      <% if current_user && (current_user.admin? || current_user.email == comment.author) %>
+        <%= link_to 'Editar', edit_post_comment_path(@post, comment), class:"link-light" %>
+      <% end %>
+    </div>
+  <% end %>
+  <!-- Crear Comentarios -->
+  <%= render 'comments/form' %>
+</div>

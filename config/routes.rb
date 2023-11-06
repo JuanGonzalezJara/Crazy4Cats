@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  devise_for :users
+  resources :posts do
+    resources :comments
+  end
+  post '/reactions', to: 'reactions#user_reaction', as: 'user_reaction'
+  get '/my_reactions', to: 'reactions#post_with_reactions', as: 'my_reactions'
 
-  # Defines the root path route ("/")
-  # root "articles#index"
+  root 'posts#index'
 end
