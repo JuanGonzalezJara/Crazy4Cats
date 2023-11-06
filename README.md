@@ -43,7 +43,7 @@ En el archivo seed.rb podremos realizar la carga del siguiente set:
 Clona el repositorio con el siguiente comando:
 
 ```bash
-git clone https://github.com/JuanGonzalezJara/
+git clone https://github.com/JuanGonzalezJara/Crazy4Cats
 ```
 
 En la terminal, accede a la carpeta donde se encuentra el repositorio y ejecuta (debes tener instalado Ruby y la gema bundle):
