@@ -17,13 +17,13 @@ class CommentsController < ApplicationController
   def create
     @comment = @post.comments.build(comment_params)
     @comment.user = current_user if user_signed_in?
-    @comment.user ||= User.find_by(email: 'anonimo@example.com') # Buscar usuario genérico si no hay usuario conectado
+    @comment.user ||= User.find_by(email: "e@e.com")
     respond_to do |format|
       if @comment.save
-        format.html { redirect_to @post, notice: 'Comment was successfully created.' }
+        format.html { redirect_to @post, notice: "Comentario fue creado exitosamente." }
         format.json { render :show, status: :created, location: @post }
       else
-        format.html { redirect_to @post, alert: 'Failed to create comment.' }
+        format.html { redirect_to @post, alert: "Fallo al crear el comentario." }
         format.json { render json: @comment.errors, status: :unprocessable_entity }
       end
     end
@@ -34,7 +34,7 @@ class CommentsController < ApplicationController
   def update
     respond_to do |format|
       if @comment.update(comment_params)
-        format.html { redirect_to @post, notice: 'Comment was successfully updated.' }
+        format.html { redirect_to @post, notice: "Comentario fue actualizado exitosamente." }
         format.json { render :show, status: :ok, location: @post }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -47,11 +47,11 @@ class CommentsController < ApplicationController
     if current_user.admin? || current_user == @comment.user
       @comment.destroy
       respond_to do |format|
-        format.html { redirect_to @post, notice: 'Comment was successfully deleted.' }
+        format.html { redirect_to @post, notice: "Comentario fue eliminado exitosamente." }
         format.json { head :no_content }
       end
     else
-      redirect_to @post, alert: 'You are not authorized to delete this comment.'
+      redirect_to @post, alert: "No estas autorizado para eliminar este comentario."
     end
   end
 
@@ -69,6 +69,6 @@ class CommentsController < ApplicationController
   def authorize_comment_edit
     return if current_user.admin? || (@comment && @comment.user == current_user)
 
-    redirect_to root_path, alert: 'You are not authorized to perform this action.'
+    redirect_to root_path, alert: "No estas autorizado para realizar esta accion."
   end
 end

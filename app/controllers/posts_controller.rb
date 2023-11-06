@@ -26,7 +26,7 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.save
-        format.html { redirect_to post_url(@post), notice: 'Post was successfully created.' }
+        format.html { redirect_to post_url(@post), notice: "Post fue creado con exito." }
         format.json { render :show, status: :created, location: @post }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -39,7 +39,7 @@ class PostsController < ApplicationController
   def update
     respond_to do |format|
       if @post.update(post_params)
-        format.html { redirect_to post_url(@post), notice: 'Post was successfully updated.' }
+        format.html { redirect_to post_url(@post), notice: "Post fue actualizado con exito." }
         format.json { render :show, status: :ok, location: @post }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -53,11 +53,11 @@ class PostsController < ApplicationController
     if current_user.admin? || current_user == @post.user
       @post.destroy
       respond_to do |format|
-        format.html { redirect_to posts_url, notice: 'Post was successfully destroyed.' }
+        format.html { redirect_to posts_url, notice: "Post fue eliminado con exito." }
         format.json { head :no_content }
       end
     else
-      redirect_to @post, alert: 'You are not authorized to perform this action.'
+      redirect_to @post, alert: "No estas autorizado para realizar esta accion."
     end
   end
 

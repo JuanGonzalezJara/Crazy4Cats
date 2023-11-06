@@ -2,8 +2,8 @@
   <%= render @comment %>
   <% if user_signed_in? && (@comment.user == current_user || current_user.admin?) %>
     <div class="d-flex gap-4 align-items-center justify-content-center">
-      <%= link_to "Back", edit_post_comment_path(@comment.post, @comment), class: "link-warning" %>
-      <%= button_to "Delete", post_comment_path(@comment.post, @comment), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-sm btn-outline-danger" %>
+      <%= link_to "Volver", edit_post_comment_path(@comment.post, @comment), class: "link-light" %>
+      <%= button_to "Eliminar", post_comment_path(@comment.post, @comment), method: :delete, data: { confirm: 'Estas seguro' }, class: "btn btn-sm btn-outline-danger" %>
     </div>
   <% end %>
 </div>
